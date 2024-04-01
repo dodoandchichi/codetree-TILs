@@ -137,7 +137,7 @@ void LaserAttack(){
     tower[ex][ey] = make_pair(max(0,str-damage), exp);
 
     int new_x = ex, new_y = ey;
- 
+
     while(1){
         int x = back_x[new_x][new_y];
         int y = back_y[new_x][new_y];
@@ -202,7 +202,7 @@ void Simulate(){
     visited[x][y] = true;
     BFS();
     if(CanLaser) LaserAttack();
-    else PortAttack(); 
+    else PortAttack();
     Heal();
 }
 
@@ -220,6 +220,15 @@ int main() {
 
     for(int i=1; i<=k; i++){
         Simulate();
+        int cnt = 0;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(tower[i][j].first){
+                    cnt++;
+                }
+            }
+        }
+        if(cnt == 1) break;
     }
 
     int max_str = 0;
