@@ -1,117 +1,187 @@
-#include <iostream>
-#include <queue>
+#include<iostream>
+#include<vector>
+#include<string.h>
 
 using namespace std;
 
-#define MAX_N 31
-#define MAX_L 41
+struct INFO {
+    int r;
+    int c;
+    int h;
+    int w;
+    int k;
+};
 
-int l, n, q;
-int info[MAX_L][MAX_L];
-int bef_k[MAX_N];
-int r[MAX_N], c[MAX_N], h[MAX_N], w[MAX_N], k[MAX_N];
-int nr[MAX_N], nc[MAX_N];
-int dmg[MAX_N];
-bool is_moved[MAX_N];
+int L,N,Q;
+int map[41][41];
+int player_map[41][41];
+int copy_map[41][41];
+int visit[41][41];
+vector<INFO> player;
+vector<int> v_first;
 
-int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+int dy[4] = {-1,0,1,0};
+int dx[4] = {0,1,0,-1};
 
-// 움직임을 시도해봅니다.
-bool TryMovement(int idx, int dir) {
-    // 초기화 작업입니다.
-    for(int i = 1; i <= n; i++) {
-        dmg[i] = 0;
-        is_moved[i] = false;
-        nr[i] = r[i];
-        nc[i] = c[i];
+int trial = 0;
+void print() {
+    trial++;
+    cout << "***" << trial << "th trial***" << "\n";
+    for(int i=1;i<=L;i++){
+        for(int j=1;j<=L;j++){
+            cout << player_map[i][j] << " ";
+        }
+        cout << "\n";
     }
 
-    queue<int> q;
+    for(int v=1;v<=N;v++){
+        cout << player[v].k << " ";
+    }
+    cout << "\n";
+}
 
-    q.push(idx);
-    is_moved[idx] = true;
+int possible_move(int n, int d) {
+    int flag = 0;
+    for(int i=1;i<=L;i++){
+        for(int j=1;j<=L;j++){
+            if(player_map[i][j] == n){
+                int now_y = i;
+                int now_x = j;
+                int next_y = i + dy[d];
+                int next_x = j + dx[d];
+                if(map[next_y][next_x] == 2){
+                    flag = 1;
+                    break;
+                }
+                if(next_y <= 0 || next_y > L || next_x <= 0 || next_x > L){
+                    flag = 1;
+                    break;
+                }
+                if(player_map[next_y][next_x] != 0 && player_map[next_y][next_x] != n){
+                    int new_n = player_map[next_y][next_x];
+                    int new_flag = possible_move(new_n,d);
+                    if(new_flag == 1){
+                        flag = 1;
+                        break;
+                    }
+                }
+            }
+        }
+        if(flag == 1){
+            break;
+        }
+    }
+    return flag;
+}
 
-    while(!q.empty()) {
-        int x = q.front(); q.pop();
+void move(int n, int d, int f) {
+    int now_flag = -1;
+    if(f == 0){
+        now_flag = possible_move(n,d);
+    }else{
+        now_flag = 0;
+    }
+    
+    if(now_flag == 0){
+        for(int i=1;i<=L;i++){
+            for(int j=1;j<=L;j++){
+                if(player_map[i][j] == n && visit[i][j] == 0){
+                    int now_y = i;
+                    int now_x = j;
+                    int next_y = now_y + dy[d];
+                    int next_x = now_x + dx[d];
 
-        nr[x] += dx[dir];
-        nc[x] += dy[dir];
+                    copy_map[next_y][next_x] = player_map[now_y][now_x];
+                    visit[now_y][now_x] = 1;
 
-        // 경계를 벗어나는지 체크합니다.
-        if(nr[x] < 1 || nc[x] < 1 || nr[x] + h[x] - 1 > l || nc[x] + w[x] - 1 > l)
-            return false;
+                    if(map[next_y][next_x] == 1 && f == 1){
+                        player[n].k--;
+                    }
 
-        // 대상 조각이 다른 조각이나 장애물과 충돌하는지 검사합니다.
-        for(int i = nr[x]; i <= nr[x] + h[x] - 1; i++) {
-            for(int j = nc[x]; j <= nc[x] + w[x] - 1; j++) {
-                if(info[i][j] == 1) 
-                    dmg[x]++;
-                if(info[i][j] == 2)
-                    return false;
+                    if(player_map[next_y][next_x] != 0 && player_map[next_y][next_x] != n){
+                        move(player_map[next_y][next_x],d,1);
+                    }
+                }
             }
         }
 
-        // 다른 조각과 충돌하는 경우, 해당 조각도 같이 이동합니다.
-        for(int i = 1; i <= n; i++) {
-            if(is_moved[i] || k[i] <= 0) 
-                continue;
-            if(r[i] > nr[x] + h[x] - 1 || nr[x] > r[i] + h[i] - 1) 
-                continue;
-            if(c[i] > nc[x] + w[x] - 1 || nc[x] > c[i] + w[i] - 1) 
-                continue;
+        if(f == 0){
+            for(int i=1;i<=L;i++){
+                for(int j=1;j<=L;j++){
+                    if(visit[i][j] == 1){
+                        player_map[i][j] = 0;
+                    }
+                }
+            }
 
-            is_moved[i] = true;
-            q.push(i);
-        }
-    }
-
-    dmg[idx] = 0;
-    return true;
-}
-
-// 특정 조각을 지정된 방향으로 이동시키는 함수입니다.
-void MovePiece(int idx, int dir) {
-    if(k[idx] <= 0) 
-        return;
-
-    // 이동이 가능한 경우, 실제 위치와 체력을 업데이트합니다.
-    if(TryMovement(idx, dir)) {
-        for(int i = 1; i <= n; i++) {
-            r[i] = nr[i];
-            c[i] = nc[i];
-            k[i] -= dmg[i];
+            for(int i=1;i<=L;i++){
+                for(int j=1;j<=L;j++){
+                    if(copy_map[i][j] > 0){
+                        player_map[i][j] = copy_map[i][j];
+                    }
+                }
+            }
         }
     }
 }
 
 int main() {
-    cin >> l >> n >> q;
-    for(int i = 1; i <= l; i++)
-        for(int j = 1; j <= l; j++)
-            cin >> info[i][j];
-    for(int i = 1; i <= n; i++) {
-        cin >> r[i] >> c[i] >> h[i] >> w[i] >> k[i];
-        bef_k[i] = k[i];
+    cin >> L >> N >> Q;
+    for(int i=1;i<=L;i++){
+        for(int j=1;j<=L;j++){
+            cin >> map[i][j];
+        }
     }
-    for(int i = 1; i <= q; i++) {
-        int idx, dir;
-        cin >> idx >> dir;
-        MovePiece(idx, dir);
+    player.push_back({0,0,0,0,0});
+    v_first.push_back(0);
+    for(int i=0;i<N;i++){
+        int a, b, c, d, e;
+        cin >> a >> b >> c >> d >> e;
+        player.push_back({a,b,c,d,e});
+        v_first.push_back(e);
     }
+    for(int v=1;v<=N;v++){
+        int yy = player[v].r;
+        int xx = player[v].c;
+        int hh = player[v].h;
+        int ww = player[v].w;
 
-    // 결과를 계산하고 출력합니다.
-    long long ans = 0;
-    for(int i = 1; i <= n; i++) {
-        if(k[i] > 0) {
-            ans += bef_k[i] - k[i];
+        for(int i=yy;i<yy+hh;i++){
+            for(int j=xx;j<xx+ww;j++){
+                player_map[i][j] = v;
+            }
+        }
+    }
+    for(int i=0;i<Q;i++){
+        int a, b;
+        cin >> a >> b;
+        if(player[a].k > 0){
+            memset(copy_map,0,sizeof(copy_map));
+            memset(visit,0,sizeof(visit));
+            move(a,b,0);
+        }
+
+        for(int v=1;v<=N;v++){
+            if(player[v].k <= 0){
+                for(int i=1;i<=N;i++){
+                    for(int j=1;j<=N;j++){
+                        if(player_map[i][j] == v){
+                            player_map[i][j] = 0;
+                        }
+                    }
+                }
+            }
         }
     }
 
-    cout << ans;
+    int result = 0;
+    for(int v=1;v<=N;v++){
+        if(player[v].k > 0){
+            result += v_first[v] - player[v].k;
+        }
+    }
+
+    cout << result;
+
     return 0;
 }
-
-
-/*
-    쉽긴한데 다시 풀라하면 풀 수 있을까..
-*/
