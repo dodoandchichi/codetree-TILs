@@ -87,7 +87,7 @@ void Attack(){
         for(int j=0; j<m; j++){
             int str, exp;
             tie(str, exp) = tower[i][j];
-            if(str == 0) continue;
+            if(str == 0 || (attacker == make_pair(i, j))) continue;
             tuple<int, int, int, int> new_tower = make_tuple(str, exp, i, j);
             if(NeedUpdate2(best_tower, new_tower)) best_tower = new_tower;
         }
@@ -192,13 +192,17 @@ void Simulate(){
     Init();
     Choose_Attack();
     Attack();
+    int sx, sy, ex, ey;
+    tie(ex, ey) = subattacker;
+    tie(sx, sy) = attacker;
+
     int x, y;
     tie(x, y) = attacker;
     q.push(make_pair(x, y));
     visited[x][y] = true;
     BFS();
     if(CanLaser) LaserAttack();
-    else PortAttack();  
+    else PortAttack(); 
     Heal();
 }
 
