@@ -168,7 +168,7 @@ void PortAttack(){
         int x = (ex + dx[i] + n) % n;
         int y = (ey + dy[i] + m) % m;
 
-        if(tower[x][y].first > 0){
+        if(tower[x][y].first > 0 && attacker != make_pair(x, y)){
             int str, exp;
             tie(str, exp) = tower[x][y];
             tower[x][y] = make_pair(max(0, str-damage/2), exp);
@@ -245,3 +245,15 @@ int main() {
     cout << max_str;
     return 0;
 }
+
+
+
+/*
+    실수 개많이하고 조심해야하는 문제..
+
+    1. 포탑이 하나만 남아있을 때 종료해야하는데 못보고 지나침
+    2. 공격 대상자 좌표에 도착하면 BFS가 종료되는데 매 턴마다 q를 초기화하지않음
+    3. k-1로 최근 공격한 턴을 기록하려했는데 k는 바뀌지않음.. turn을 따로만들어줌
+    4. back_x, back_y로 돌아와는 좌표를 기록해줌
+    5. 포탄 공격일 때 자기 자신 피해안입도록 설정안함..
+*/
