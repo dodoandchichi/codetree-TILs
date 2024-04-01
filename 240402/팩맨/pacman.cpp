@@ -124,7 +124,6 @@ void DoKill(tuple<int, int, int> best_route) {
         x = nx; y = ny;
     }
     pack = make_pair(x, y);
-    cout << x << " " << y << "\n";
 }
 
 void Pack_Move() {
@@ -170,33 +169,9 @@ void Simulate(){
     Breed();
     Mon_Move();
     CopyToMon();
-    cout << "After MonMove\n";
-    for(int i=0; i<n; i++){
-        for(int j=0; j<n; j++){
-            cout << mon[i][j].size() << " ";
-        }
-        cout << "\n";
-    }
-    cout << "\n";
     Pack_Move();
-    cout << "After PackMove\n";
-    for(int i=0; i<n; i++){
-        for(int j=0; j<n; j++){
-            cout << mon[i][j].size() << " ";
-        }
-        cout << "\n";
-    }
-    cout << "\n";
     DeadDie();
     Duplicate();
-    cout << "After Duplicate\n";
-    for(int i=0; i<n; i++){
-        for(int j=0; j<n; j++){
-            cout << mon[i][j].size() << " ";
-        }
-        cout << "\n";
-    }
-    cout << "\n";
 }
 
 int main() {
@@ -215,15 +190,6 @@ int main() {
         Simulate();
     }
     int ans = 0;
-    cout << "Result\n";
-    for(int i=0; i<n; i++){
-        for(int j=0; j<n; j++){
-            cout << mon[i][j].size() << " ";
-            ans += mon[i][j].size();
-        }
-        cout << "\n";
-    }
-    cout << "\n";
     
     cout << ans;
     return 0;
