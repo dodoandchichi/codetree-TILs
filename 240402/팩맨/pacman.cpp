@@ -118,7 +118,7 @@ void DoKill(tuple<int, int, int> best_route) {
 
     for(int i = 0; i < 3; i++) {
         int nx = x + p_dx[dirs[i]], ny = y + p_dy[dirs[i]];
-        dead[nx][ny] = 3;
+        dead[nx][ny] = 2;
         mon[nx][ny].clear();
         x = nx; y = ny;
     }
