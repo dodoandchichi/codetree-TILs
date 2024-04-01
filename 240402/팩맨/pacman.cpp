@@ -112,7 +112,6 @@ int GetKilledNum(int dir1, int dir2, int dir3) {
 void DoKill(tuple<int, int, int> best_route) {
     int dir1, dir2, dir3;
     tie(dir1, dir2, dir3) = best_route;
-    cout << dir1 << " " << dir2 << " " << dir3 << "\n";
     int dirs[] = {dir1, dir2, dir3};
     int x, y;
     tie(x, y) = pack;
