@@ -18,6 +18,7 @@ bool relate[MAX_N][MAX_N];
 int back_x[MAX_N][MAX_N];
 int back_y[MAX_N][MAX_N];
 bool CanLaser;
+int turn;
 
 void Init(){
     CanLaser = false;
@@ -62,7 +63,7 @@ void Choose_Attack(){
     int x, y, str, exp;
     tie(ignore, ignore, x, y) = best_tower;
     tie(str, exp) = tower[x][y];
-    tower[x][y] = make_pair(str+n+m, k);
+    tower[x][y] = make_pair(str+n+m, turn);
     attacker = make_pair(x, y);
     relate[x][y] = true;
 }
@@ -195,7 +196,7 @@ void Simulate(){
     int sx, sy, ex, ey;
     tie(ex, ey) = subattacker;
     tie(sx, sy) = attacker;
-
+    
     int x, y;
     tie(x, y) = attacker;
     q.push(make_pair(x, y));
@@ -203,6 +204,7 @@ void Simulate(){
     BFS();
     if(CanLaser) LaserAttack();
     else PortAttack();
+    
     Heal();
 }
 
@@ -219,6 +221,7 @@ int main() {
     }
 
     for(int i=1; i<=k; i++){
+        turn++;
         Simulate();
         int cnt = 0;
         for(int i=0; i<n; i++){
