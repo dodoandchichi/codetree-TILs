@@ -19,8 +19,6 @@ int dx[DIR_NUM] = {-1, -1, 0, 1, 1, 1, 0, -1};
 int dy[DIR_NUM] = {0, -1, -1, -1, 0, 1, 1, 1};
 int p_dx[P_DIR_NUM] = {-1, 0, 1, 0};
 int p_dy[P_DIR_NUM] = {0, -1, 0, 1};
-vector<int> selected_dir;
-int maxCatch;
 
 void Init(){
     for(int i=0; i<n; i++){
@@ -35,7 +33,6 @@ bool InRange(int x, int y){
 }
 
 void Breed(){
-    
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
             if(mon[i][j].size() >= 1){
@@ -118,7 +115,7 @@ void DoKill(tuple<int, int, int> best_route) {
 
     for(int i = 0; i < 3; i++) {
         int nx = x + p_dx[dirs[i]], ny = y + p_dy[dirs[i]];
-        dead[nx][ny] = 2;
+        dead[nx][ny] = 3;
         mon[nx][ny].clear();
         x = nx; y = ny;
     }
@@ -166,6 +163,8 @@ void Duplicate(){
 void Simulate(){
     Init();
     Breed();
+    int x, y;
+    tie(x, y) = pack;
     Mon_Move();
     CopyToMon();
     Pack_Move();
@@ -194,7 +193,6 @@ int main() {
             ans += mon[i][j].size();
         }
     }
-    
     cout << ans;
     return 0;
 }
