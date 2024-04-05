@@ -54,7 +54,7 @@ bool InRange(int x, int y) {
 // 몬스터 시체가 없고, 팩맨도 없다면
 // 이동이 가능합니다.
 bool CanGo(int x, int y) {
-    return InRange(x, y) && dead[x][y][0] == 0 && dead[x][y][1] == 0 
+    return InRange(x, y) && dead[x][y][1] == 0 
            && make_pair(x, y) != make_pair(px, py);
 }
 
