@@ -104,7 +104,7 @@ void GoBase(){
             for(int j=0; j<n; j++){
                 if(base[i][j] == 1){
                     pair<int, int> cur_base = make_pair(i, j);
-                    if(NeedUpdate(best_base, cur_base)) best_base = cur_base;
+                    if(NeedUpdate(best_base, cur_base) && visited[cur_base.first][cur_base.second]) best_base = cur_base;
                 }
             }
         }
@@ -117,7 +117,23 @@ void GoBase(){
 
 void Simulate(){
     Move(); // 1번, 편의점 방향을 향해 1칸 이동
+    /*
+    cout << "people\n";
+    for(int i=0; i<m; i++){
+        cout << people[i].first << " " << people[i].second << "\n";
+    }
+    */
     GoBase(); // 3번, 가장 가까운 베이스캠프로 들어감
+    /*
+    cout << "base\n";
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                cout << base[i][j] << " ";
+            }
+            cout << "\n";
+        }
+        cout << "\n";
+        */
 }
 
 bool End(){
