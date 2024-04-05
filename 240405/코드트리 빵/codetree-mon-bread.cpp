@@ -104,7 +104,7 @@ void GoBase(){
             for(int j=0; j<n; j++){
                 if(base[i][j] == 1){
                     pair<int, int> cur_base = make_pair(i, j);
-                    if(NeedUpdate(best_base, cur_base) && visited[cur_base.first][cur_base.second]) best_base = cur_base;
+                    if(visited[cur_base.first][cur_base.second] && NeedUpdate(best_base, cur_base)) best_base = cur_base;
                 }
             }
         }
