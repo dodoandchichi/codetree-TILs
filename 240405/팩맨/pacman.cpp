@@ -11,7 +11,7 @@ using namespace std;
 
 int n = 4;
 int mon[MAX_T][MAX_N][MAX_N][DIR_NUM];
-int dead[MAX_N][MAX_N][MAX_DECAY];
+int dead[MAX_N][MAX_N][MAX_DECAY+1];
 int m, t, r, c;
 int px, py;
 int turn = 1;
@@ -76,6 +76,7 @@ int getKill(int dir1, int dir2, int dir3){
             for(int k=0; k<DIR_NUM; k++){
                 cnt += mon[turn][new_x][new_y][k];
             }
+            v_pos.push_back(make_pair(new_x, new_y));
         }
         x = new_x, y = new_y;
     }
