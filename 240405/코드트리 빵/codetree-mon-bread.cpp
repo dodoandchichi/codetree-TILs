@@ -43,7 +43,7 @@ void BFS(pair<int, int> cvs_list){
         for(int i=0; i<DIR_NUM; i++){
             int new_x = x + dx[i];
             int new_y = y + dy[i];
-            if(InRange(new_x, new_y) && !visited[new_x][new_y]){
+            if(InRange(new_x, new_y) && !visited[new_x][new_y] && base[new_x][new_y] != 2){
                 visited[new_x][new_y] = true;
                 q.push(make_pair(new_x, new_y));
                 step[new_x][new_y] = step[x][y] + 1;
@@ -57,9 +57,9 @@ void Move(){
         if(people[i] == make_pair(-1, -1) || people[i] == cvs_list[i]) continue;
         Init();
         BFS(cvs_list[i]);
-
         int x, y, nx, ny;
         tie(x, y) = people[i];
+        step[x][y] = abs(x-cvs_list[i].first) + abs(y-cvs_list[i].second);
         int min_dist = step[x][y];
 
         for(int j=0; j<DIR_NUM; j++){
