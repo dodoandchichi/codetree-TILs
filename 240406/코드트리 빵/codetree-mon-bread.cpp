@@ -8,7 +8,7 @@ using namespace std;
 
 int n, m;
 int base[MAX_N][MAX_N]; 
-pair<int, int> cvs_list[MAX_N];
+pair<int, int> cvs_list[MAX_N * 2];
 pair<int, int> people[MAX_N * 2];
 bool visited[MAX_N][MAX_N];
 int step[MAX_N][MAX_N];
