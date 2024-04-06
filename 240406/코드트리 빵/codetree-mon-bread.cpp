@@ -2,7 +2,7 @@
 #include <queue>
 #include <tuple>
 
-#define MAX_N 16
+#define MAX_N 30
 #define DIR_NUM 4
 using namespace std;
 
