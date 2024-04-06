@@ -78,8 +78,7 @@ void LoserMove(Player player){
 void Match(Player player1, Player player2){
     int num1, num2, s1, a1, s2, a2, x1, y1, x2, y2, d1, d2;
     tie(num1, x1, y1, d1, s1, a1) = player1;
-    tie(num2, x2, y2, d2, s2, a2) = player2;
-    cout << s1 << " " << a1 << " " << s2 << " " << a2 <<"\n"; 
+    tie(num2, x2, y2, d2, s2, a2) = player2; 
     if(make_pair(s1+a1, s1) < make_pair(s2+a2, s2)){
         int score = (s2+a2) - (s1+a1);
         point[num2] += score;
@@ -117,11 +116,6 @@ void Simulate(){
             Match(players[i], next_player);
         }
     }
-    
-    for(int i=1; i<=m; i++){
-        cout << get<0>(players[i]) << ": " << get<1>(players[i]) << " " << get<2>(players[i]) << "\n";
-    }
-    cout << "\n";
 }
 
 int main() {
