@@ -139,9 +139,10 @@ void LaserAttack(){
 
     int new_x = ex, new_y = ey;
 
-    while(!(x == sx && y == sy)){
+    while(1){
         int x = back_x[new_x][new_y];
         int y = back_y[new_x][new_y];
+        if(x == sx && y == sy) break;
         tie(str, exp) = tower[x][y];
         tower[x][y] = make_pair(max(0,str-damage/2), exp);
         relate[x][y] = true;
@@ -198,7 +199,7 @@ void Simulate(){
     q.push(make_pair(x, y));
     visited[x][y] = true;
     BFS();
-
+    
     if(CanLaser) LaserAttack();
     else PortAttack();
     
