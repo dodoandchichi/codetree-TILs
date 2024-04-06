@@ -127,7 +127,7 @@ void Drug(){
 
     bool CanGo[DIR_NUM] = {1, 1, 1, 1};
     drug[max_x][max_y] = c+1;
-    ans += tree[max_x][max_y];
+    if(tree[max_x][max_y] >=0) ans += tree[max_x][max_y];
     tree[max_x][max_y] = 0;
     for(int l=1; l<=k; l++){
         for(int dir=0; dir<DIR_NUM; dir++){
