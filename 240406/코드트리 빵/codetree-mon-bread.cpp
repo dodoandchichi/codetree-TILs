@@ -75,9 +75,6 @@ void Move(){
                 min_dist = cur_dist;
             }
         }
-        if(cvs_list[i] == make_pair(nx, ny)){
-            base[nx][ny] = 2;
-        }
         people[i] = make_pair(nx, ny);
     }
 }
@@ -117,8 +114,18 @@ void GoBase(){
     }
 }
 
+void BlockConv(){
+    for(int i = 0; i < m; i++) {
+        if(people[i] == cvs_list[i]) {
+            int px, py;
+            tie(px, py) = people[i];
+            base[px][py] = 2;
+        }
+    }
+}
 void Simulate(){
     Move(); // 1번, 편의점 방향을 향해 1칸 이동
+    BlockConv();
     /*
     cout << "people\n";
     for(int i=0; i<m; i++){
