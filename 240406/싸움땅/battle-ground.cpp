@@ -51,24 +51,28 @@ void Move(Player player, int new_x, int new_y, int new_dir){
         }
     }
     else{
-        players[num] = make_tuple(num, new_x, new_y, d, s, a);
+        players[num] = make_tuple(num, new_x, new_y, new_dir, s, a);
     }
 }
 
 void LoserMove(Player player){
     int num, x, y, d, s, a;
     tie(num, x, y, d, s, a) = player;
-
+    /*
+    cout << "after match\n";
+    cout << num << " " << x << " " << y << " " << d << "\n"; 
+    */
     gun[x][y].push_back(a);
     int new_x = x + dx[d];
     int new_y = y + dy[d];
-    
+
     Player next_player = OtherPlayer(new_x, new_y);
 
     while(!InRange(new_x, new_y) || next_player != EMPTY){
         d = (d + 1) % 4;
         new_x = x + dx[d];
         new_y = y + dy[d];
+
         next_player = OtherPlayer(new_x, new_y);
     }
     players[num] = make_tuple(num, new_x, new_y, d, s, 0);
@@ -78,7 +82,7 @@ void LoserMove(Player player){
 void Match(Player player1, Player player2){
     int num1, num2, s1, a1, s2, a2, x1, y1, x2, y2, d1, d2;
     tie(num1, x1, y1, d1, s1, a1) = player1;
-    tie(num2, x2, y2, d2, s2, a2) = player2; 
+    tie(num2, x2, y2, d2, s2, a2) = player2;
     if(make_pair(s1+a1, s1) < make_pair(s2+a2, s2)){
         int score = (s2+a2) - (s1+a1);
         point[num2] += score;
@@ -94,6 +98,12 @@ void Match(Player player1, Player player2){
 }
 
 void Simulate(){
+    /*
+    for(int i=1; i<=m; i++){
+        cout << get<0>(players[i]) << ": " << get<1>(players[i]) << " " << get<2>(players[i]) << " " << get<3>(players[i])<<"\n";
+    }
+    cout << "\n";*/
+
     for(int i=1; i<=m; i++){
         int num, x, y, dir, s, a;
         tie(num, x, y, dir, s, a) = players[i];
@@ -112,6 +122,10 @@ void Simulate(){
             Move(players[i], new_x, new_y, dir);
         }
         else{
+            /*
+            cout << "before match\n";
+            cout << num << " " << new_x << " " << new_y << " " << dir << "\n";
+            */
             players[i] = make_tuple(num, new_x, new_y, dir, s, a);
             Match(players[i], next_player);
         }
