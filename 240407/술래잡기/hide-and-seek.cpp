@@ -63,7 +63,7 @@ void Hider_Move(int x, int y, int dir){
         }
     }
     else{
-        dir = (dir + 2) % 4;
+        dir = (dir < 2) ? (1 - dir) : (5 - dir);
         new_x = x + dx[dir];
         new_y = y + dy[dir];
         if(sx == new_x && sy == new_y){
