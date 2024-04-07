@@ -53,54 +53,56 @@ void Move_Rudolf(){
     int santa_x, santa_y;
     tie(santa_x, santa_y) = best_santa;
 
-    int move_x = 0;
-    if(rudol_x < santa_x) move_x++;
-    else if(rudol_x > santa_x) move_x--;
+    if(best_santa != EMPTY){
+        int move_x = 0;
+        if(rudol_x < santa_x) move_x++;
+        else if(rudol_x > santa_x) move_x--;
 
-    int move_y = 0;
-    if(rudol_y < santa_y) move_y++;
-    else if(rudol_y > santa_y) move_y--;
+        int move_y = 0;
+        if(rudol_y < santa_y) move_y++;
+        else if(rudol_y > santa_y) move_y--;
 
-    rudolf = make_pair(rudol_x+move_x, rudol_y+move_y);
-    grid[rudolf.first][rudolf.second] = -1;
+        rudolf = make_pair(rudol_x+move_x, rudol_y+move_y);
+        grid[rudolf.first][rudolf.second] = -1;
 
-    if(rudolf.first == santa_x && rudolf.second == santa_y){
-        int firstX = santa_x + move_x * c;
-        int firstY = santa_y + move_y * c;
-        int lastX = firstX;
-        int lastY = firstY;
+        if(rudolf.first == santa_x && rudolf.second == santa_y){
+            int firstX = santa_x + move_x * c;
+            int firstY = santa_y + move_y * c;
+            int lastX = firstX;
+            int lastY = firstY;
 
-        stun[closerIdx] = 2;
-        point[closerIdx] += c;
+            stun[closerIdx] = 2;
+            point[closerIdx] += c;
 
-        while(InRange(lastX, lastY) && grid[lastX][lastY] > 0){
-            lastX += move_x;
-            lastY += move_y;
-        }
-
-        while(!(lastX == firstX && lastY == firstY)){
-            int beforeX = lastX - move_x;
-            int beforeY = lastY - move_y;
-
-            int idx = grid[beforeX][beforeY];
-
-            if(!InRange(lastX, lastY)){
-                is_live[idx] = false;
+            while(InRange(lastX, lastY) && grid[lastX][lastY] > 0){
+                lastX += move_x;
+                lastY += move_y;
             }
-            else{
-                grid[lastX][lastY] = grid[beforeX][beforeY];
-                santa[idx] = make_pair(lastX, lastY);
-            }
-            
-            lastX -= move_x;
-            lastY -= move_y;
-        }
 
-        santa[closerIdx] = make_pair(firstX, firstY);
-        if(InRange(firstX, firstY)){
-            grid[firstX][firstY] = closerIdx;
+            while(!(lastX == firstX && lastY == firstY)){
+                int beforeX = lastX - move_x;
+                int beforeY = lastY - move_y;
+
+                int idx = grid[beforeX][beforeY];
+
+                if(!InRange(lastX, lastY)){
+                    is_live[idx] = false;
+                }
+                else{
+                    grid[lastX][lastY] = grid[beforeX][beforeY];
+                    santa[idx] = make_pair(lastX, lastY);
+                }
+                
+                lastX -= move_x;
+                lastY -= move_y;
+            }
+
+            santa[closerIdx] = make_pair(firstX, firstY);
+            if(InRange(firstX, firstY)){
+                grid[firstX][firstY] = closerIdx;
+            }
+            else is_live[closerIdx] = false;
         }
-        else is_live[closerIdx] = false;
     }
 }
 
@@ -237,7 +239,7 @@ int main() {
     cin >> r >> c;
     rudolf = make_pair(r-1, c-1);
 
-    for(int i=0; i<p; i++){
+    for(int i=1; i<=p; i++){
         int num, x, y;
         cin >> num >> x >> y;
         grid[x-1][y-1] = num;
