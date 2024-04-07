@@ -35,6 +35,7 @@ void Rotate(){
     int box_size = (1 << level);
     int half_size = box_size / 2;
 
+    if(level == 0) return;
     for(int i=0; i<grid_size; i++){
         for(int j=0; j<grid_size; j++){
             copy_grid[i][j] = 0;
