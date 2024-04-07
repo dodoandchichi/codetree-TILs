@@ -115,16 +115,18 @@ void BFS(){
 void Count(){
     for(int i=0; i<grid_size; i++){
         for(int j=0; j<grid_size; j++){
-            total_ice += grid[i][j];
+            if(grid[i][j]){
+                total_ice += grid[i][j];
 
-            if(visited[i][j]) continue;
+                if(visited[i][j]) continue;
 
-            q.push(make_pair(i, j));
-            visited[i][j] = true;
-            cnt = 1;
-            BFS();
+                q.push(make_pair(i, j));
+                visited[i][j] = true;
+                cnt = 1;
+                BFS();
 
-            best_size = max(best_size, cnt);
+                best_size = max(best_size, cnt);
+            }
         }
     }
 }
