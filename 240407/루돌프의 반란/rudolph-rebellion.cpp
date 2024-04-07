@@ -255,3 +255,9 @@ int main() {
     for(int i=1; i<=p; i++) cout << point[i] << " ";
     return 0;
 }
+
+
+/*
+이게 뭔 스파게티 코드인진 모르겠지만,, 디버깅을 편하게 하기 위해서 grid배열로 산타 위치를 추적했고
+Move Rudolf에서 best_santa가 empty라면 에러가 떠서 조심해야함
+*/
