@@ -48,6 +48,9 @@ int DistFromSeeker(int x, int y){
 }
 
 void Hider_Move(int x, int y, int dir){
+    int dx[DIR_NUM] = {0, 0, 1, -1};
+    int dy[DIR_NUM] = {-1, 1, 0, 0};
+
     int new_x = x + dx[dir];
     int new_y = y + dy[dir];
 
@@ -56,6 +59,7 @@ void Hider_Move(int x, int y, int dir){
 
     if(InRange(new_x, new_y)){
         if(sx == new_x && sy == new_y){
+            copy_hiders[x][y].push_back(dir);
             return;
         }
         else{
@@ -87,6 +91,11 @@ void HiderMoveAll(){
             if(DistFromSeeker(i, j) <= 3){
                 for(int k=0; k<(int)hiders[i][j].size(); k++){
                     Hider_Move(i, j, hiders[i][j][k]);
+                }
+            }
+            else{
+                for(int k=0; k<(int) hiders[i][j].size(); k++){
+                    copy_hiders[i][j].push_back(hiders[i][j][k]);
                 }
             }
         }
@@ -129,7 +138,7 @@ void SeekerMove(){
     for(int i=0; i<=2; i++){
         int new_x = sx + dx[dir] * i;
         int new_y = sy + dy[dir] * i;
-        if(InRange(new_x, new_y) && !tree[new_x][new_y] && hiders[new_x][new_y].size() > 0){
+        if(InRange(new_x, new_y) && !tree[new_x][new_y]){
             ans += hiders[new_x][new_y].size() * turn;
             hiders[new_x][new_y].clear();
         }
@@ -152,9 +161,11 @@ int main() {
         hiders[x-1][y-1].push_back(d);
     }
 
-    int r, c;
-    cin >> r >> c;
-    tree[r-1][c-1] = true;
+    while(h--){
+        int r, c;
+        cin >> r >> c;
+        tree[r-1][c-1] = true;
+    }
 
     Initalize();
     seeker = make_pair(n/2, n/2);
