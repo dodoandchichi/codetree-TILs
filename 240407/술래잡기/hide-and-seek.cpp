@@ -31,7 +31,7 @@ void Initalize(){
         for(int i=0; i<move_cnt; i++){
             seeker_next[cur_x][cur_y] = move_dir;
             cur_x += dx[move_dir], cur_y += dy[move_dir];
-            seeker_rev[cur_x][cur_y] = (move_dir < 2) ? (1-move_dir) : (5-move_dir);
+            seeker_rev[cur_x][cur_y] = (move_dir < 2) ? (move_dir + 2) : (move_dir - 2);
 
             if(!(cur_x || cur_y)) break;
         }
