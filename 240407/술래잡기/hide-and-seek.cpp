@@ -71,6 +71,7 @@ void Hider_Move(int x, int y, int dir){
         new_x = x + dx[dir];
         new_y = y + dy[dir];
         if(sx == new_x && sy == new_y){
+            copy_hiders[x][y].push_back(dir);
             return;
         }
         else{
