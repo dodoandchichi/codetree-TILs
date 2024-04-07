@@ -63,7 +63,7 @@ Bundle GetBundle(int x, int y){
 
             bomb_cnt++;
 
-            if(grid[i][j] == 0) red_cnt = 0;
+            if(grid[i][j] == 0) red_cnt++;
             else if(make_pair(i, -j) > standard)
                 standard = make_pair(i, -j);
         }
