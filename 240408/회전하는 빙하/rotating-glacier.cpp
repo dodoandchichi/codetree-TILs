@@ -21,12 +21,24 @@ bool InRange(int x, int y){
 }
 
 void Move(int x, int y, int half_size, int dir){
+    for(int i=0; i<grid_size; i++){
+        for(int j=0; j<grid_size; j++){
+            copy_grid[i][j] = 0;
+        }
+    }
+
     for(int i=x; i<x+half_size; i++){
         for(int j=y; j<y+half_size; j++){
             int new_x = i + dx[dir] * half_size;
             int new_y = j + dy[dir] * half_size;
 
             copy_grid[new_x][new_y] = grid[i][j];
+        }
+    }
+
+    for(int i=0; i<grid_size; i++){
+        for(int j=0; j<grid_size; j++){
+            grid[i][j] = copy_grid[i][j];
         }
     }
 }
@@ -36,11 +48,6 @@ void Rotate(){
     int half_size = box_size / 2;
 
     if(level == 0) return;
-    for(int i=0; i<grid_size; i++){
-        for(int j=0; j<grid_size; j++){
-            copy_grid[i][j] = 0;
-        }
-    }
 
     for(int i=0; i<grid_size; i+=box_size){
         for(int j=0; j<grid_size; j+=box_size){
@@ -50,12 +57,6 @@ void Rotate(){
             Move(i+half_size, j+half_size, half_size, 3);
         }
     }    
-
-    for(int i=0; i<grid_size; i++){
-        for(int j=0; j<grid_size; j++){
-            grid[i][j] = copy_grid[i][j];
-        }
-    }
 }
 
 void Melt(){
