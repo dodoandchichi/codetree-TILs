@@ -9,7 +9,7 @@ int n, ans;
 int grid[MAX_N][MAX_N];
 int copy_grid[MAX_N][MAX_N];
 int group[MAX_N][MAX_N];
-int group_cnt[MAX_N];
+int group_cnt[MAX_N * MAX_N + 1];
 int group_n;
 queue<pair<int, int>> q;
 bool visited[MAX_N][MAX_N];
