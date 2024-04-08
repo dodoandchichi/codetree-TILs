@@ -138,6 +138,7 @@ bool Bomb() {
         int end_idx = GetEndIdxOfSameNum(curr_idx);
         int curr_num = GetNumBySpiralIdx(curr_idx);
 
+        if(curr_num == 0) continue;
         // 맨 끝에 도달하게 되면, 더이상 진행하지 않습니다.
         if(curr_num == 0)
             break;
@@ -150,7 +151,7 @@ bool Bomb() {
         }
 
         // 그 다음 구간의 시작값으로 변경해줍니다.
-        curr_idx = end_idx + 1;
+        //curr_idx = end_idx + 1;
     }
 
     return did_explode;
@@ -210,7 +211,7 @@ void LookAndSay() {
         temp_idx++;
 
         // 그 다음 구간의 시작값으로 변경해줍니다.
-        curr_idx = end_idx + 1;
+        curr_idx++;
     }
 
     // Step 3. temp 값을 다시 grid에 옮겨줍니다.
