@@ -211,7 +211,7 @@ void LookAndSay() {
         temp_idx++;
 
         // 그 다음 구간의 시작값으로 변경해줍니다.
-        curr_idx++;
+        curr_idx = end_idx + 1;
     }
 
     // Step 3. temp 값을 다시 grid에 옮겨줍니다.
