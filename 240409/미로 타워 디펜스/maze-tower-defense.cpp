@@ -105,7 +105,8 @@ void Remove(int start_idx, int end_idx){
 bool Bomb(){
     bool did_explode = false;
 
-    for(int cur_idx = 0; cur_idx < (int)spirals.size(); cur_idx++){
+    int cur_idx = 0;
+    while(cur_idx < (int) spirals.size()){
         int x, y;
         tie(x, y) = spirals[cur_idx];
 
@@ -117,7 +118,9 @@ bool Bomb(){
             Remove(cur_idx, end_idx);
             did_explode = true;
         }
+        cur_idx = end_idx + 1;
     }
+    
     return did_explode;
 }
 
@@ -142,14 +145,15 @@ void PutPair(){
         if(temp_idx >= end_of_array) break;
 
         int tx, ty;
-        tie(tx, ty) = spirals[cur_idx];
+        tie(tx, ty) = spirals[temp_idx++];
         temp[tx][ty] = continuous_cnt;
 
         if(temp_idx >= end_of_array) break;
-        cur_idx++;
 
-        tie(tx, ty) = spirals[cur_idx];
+        tie(tx, ty) = spirals[temp_idx++];
         temp[tx][ty] = grid[x][y];
+        
+        cur_idx = end_idx + 1;
     }
 
     for(int i=0; i<n; i++){
