@@ -35,16 +35,18 @@ void Remove() {
         }
     }
 
-    for (int i = 0; i < n-1; i++) {
-        for (int j = 0; j < m-1; j++) {
-            if (grid[i][j] == grid[i][j + 1]) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (grid[i][j] == grid[i][j + 1] && j != m-1 && grid[i][j]) {
                 removed[i][j] = true;
                 removed[i][j + 1] = true;
             }
-            else if (grid[i][0] == grid[i][m - 1]) {
+
+            if (grid[i][0] == grid[i][m - 1] && grid[i][0]) {
                 removed[i][0] = true, removed[i][m - 1] = true;
             }
-            else if (grid[i][j] == grid[i + 1][j]) {
+
+            if (grid[i][j] == grid[i + 1][j] && i != n-1 && grid[i][j]) {
                 removed[i][j] = true;
                 removed[i + 1][j] = true;
             }
@@ -63,7 +65,6 @@ void Remove() {
 
 void Normalize() {
     int sum = 0, cnt = 0;
-
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             if (grid[i][j] > 0) {
@@ -80,7 +81,7 @@ void Normalize() {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] > average)
                     grid[i][j]--;
-                else if (grid[i][j] < average)
+                else if (grid[i][j] < average && grid[i][j])
                     grid[i][j]++;
             }
         }
@@ -101,14 +102,14 @@ void Simulate() {
         if ((i + 1) % x == 0) Rotate(i);
     }
 
-   // cout << "After Roate\n";
-   // Print();
+    //cout << "After Roate\n";
+    //Print();
     Remove();
-  //  cout << "After Remove\n";
-  //  Print();
+    //cout << "After Remove\n";
+    //Print();
     if(!normalize) Normalize();
-   // cout << "After Normal\n";
-   // Print();
+    //cout << "After Normal\n";
+    //Print();
 }
 
 int main() {
