@@ -136,3 +136,9 @@ int main() {
     cout << ans;
     return 0;
 }
+
+
+/*
+    0끼리 붙어있을 때도 Remove가 true가 되어서 normalize를 안하는 경우가 있었음
+    조심하기
+*/
