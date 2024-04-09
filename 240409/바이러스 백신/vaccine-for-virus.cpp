@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
+#include <climits>
 
 #define MAX_N 51
 #define DIR_NUM 4
