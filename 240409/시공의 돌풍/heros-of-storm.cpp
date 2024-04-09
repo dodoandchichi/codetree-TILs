@@ -20,7 +20,7 @@ void AddDust(int x, int y) {
     for (int i = 0; i < DIR_NUM; i++) {
         int new_x = x + dx[i];
         int new_y = y + dy[i];
-        if (InRange(new_x, new_y) && grid[new_x][new_y] > 0) {
+        if (InRange(new_x, new_y) && grid[new_x][new_y] != -1) {
             copy_grid[new_x][new_y] += grid[x][y] / 5;
             copy_grid[x][y] -= grid[x][y] / 5;
         }
@@ -107,7 +107,23 @@ void FindWind() {
 
 void Simulate() {
     AddDustAll();
+    /*cout << "\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << grid[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    cout << "\n";*/
     FindWind();
+    /*cout << "\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << grid[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    cout << "\n";*/
 }
 
 int main() {
