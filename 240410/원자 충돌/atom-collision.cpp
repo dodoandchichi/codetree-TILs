@@ -63,12 +63,12 @@ void Merge(int x, int y) {
     int new_s = sum_s / cnt;
     if (diag && line && new_m > 0) {
         for (int i = 0; i < 4; i++) {
-            copy_atom[x][y].push_back(make_tuple(new_m, new_s, i+1));
+            copy_atom[x][y].push_back(make_tuple(new_m, new_s, i*2 + 1));
         }
     }
     else if (new_m > 0) {
         for (int i = 0; i < 4; i++) {
-            copy_atom[x][y].push_back(make_tuple(new_m, new_s, i));
+            copy_atom[x][y].push_back(make_tuple(new_m, new_s, i * 2));
         }
     }
 }
