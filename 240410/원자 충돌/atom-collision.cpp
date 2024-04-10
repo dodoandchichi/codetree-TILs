@@ -11,16 +11,16 @@ int n, m, k;
 vector<tuple<int, int, int>> atom[MAX_N][MAX_N];
 vector<tuple<int, int, int>> copy_atom[MAX_N][MAX_N];
 
-void Move(int x, int y) {
+void Move(int x, int y, int z) {
     int dx[DIR_NUM] = { -1, -1, 0, 1, 1, 1, 0, -1 };
     int dy[DIR_NUM] = { 0, 1, 1, 1, 0, -1, -1, -1 };
 
     int m, s, d;
-    tie(m, s, d) = atom[x][y][0];
+    tie(m, s, d) = atom[x][y][z];
 
 
-    int new_x = (x + dx[d] * s + n) % n;
-    int new_y = (y + dy[d] * s + n) % n;
+    int new_x = (x + dx[d] * s + n * s) % n;
+    int new_y = (y + dy[d] * s + n * s) % n;
     copy_atom[new_x][new_y].push_back(make_tuple(m, s, d));
 }
 
@@ -34,7 +34,9 @@ void MoveAll() {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             if (atom[i][j].size() > 0) {
-                Move(i, j);
+                for (int k = 0; k < (int)atom[i][j].size(); k++) {
+                    Move(i, j, k);
+                }
             }
         }
     }
@@ -83,6 +85,9 @@ void MergeAll() {
             if (atom[i][j].size() > 1) {
                 Merge(i, j);
             }
+            else if (atom[i][j].size() == 1) {
+                copy_atom[i][j].push_back(atom[i][j][0]);
+            }
         }
     }
 
@@ -94,6 +99,14 @@ void MergeAll() {
 }
 
 void Simulate() {
+    /*cout << "Before move\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << atom[i][j].size() << " ";
+        }
+        cout << "\n";
+    }
+    cout << "\n";*/
     MoveAll();
     /*cout << "After move\n";
     for (int i = 0; i < n; i++) {
