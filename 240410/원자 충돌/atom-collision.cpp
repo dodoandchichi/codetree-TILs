@@ -155,3 +155,12 @@ int main() {
     cout << ans;
     return 0;
 }
+
+
+/*
+    히든에서 두 번틀림
+
+    1. s가 있는 경우는 (x + dx[d] * s + n * s) % n;로 해야함
+        (x + dx[d] * s + n) % n가 아님
+    2. 원자가 하나만 있을때 merge 함수에 안들어가더라도 copy_atom에 푸씨해야함
+*/
