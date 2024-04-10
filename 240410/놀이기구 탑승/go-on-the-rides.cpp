@@ -108,3 +108,8 @@ int main() {
     cout << ans;
     return 0;
 }
+
+
+/*
+    쉬움 한번에 통과
+*/
