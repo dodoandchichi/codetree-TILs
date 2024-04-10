@@ -168,3 +168,7 @@ int main() {
     cout << ice_count << "\n" << ice_house;
     return 0;
 }
+
+/*
+    회전하는 것 다시 보기
+*/
