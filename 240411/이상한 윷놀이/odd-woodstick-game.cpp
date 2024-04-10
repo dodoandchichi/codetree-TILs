@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <algorithm>
 
 #define MAX_N 13
 #define DIR_NUM 4
