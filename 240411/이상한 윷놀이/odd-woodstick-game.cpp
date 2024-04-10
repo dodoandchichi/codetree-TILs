@@ -118,3 +118,9 @@ int main() {
     else cout << turn;
     return 0;
 }
+
+
+/*
+    reverse, assign, insert, erase등등,, 벡터를 다루는 여러가지 방법도 있고
+    은근 문제 퀄이 좋음. 다시 한번 풀어봐야겠따
+*/
