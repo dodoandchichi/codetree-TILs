@@ -135,3 +135,10 @@ int main() {
     cout << ans;
     return 0;
 }
+
+
+/*
+    drop에서 keep_num으로 하는 것과 tilt에서 이어지는 rotate,,,
+    조금 어렵다. 그리고, 5번 기울이기 전 grid를 저장하는 temp를 rotate나 drop에서 쓰면 초기화가 돼버림
+    그래서 copy_grid를 써야함
+*/
