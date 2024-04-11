@@ -132,10 +132,10 @@ void LookandSay(){
         tie(x, y) = spirals[cur_idx];
 
         int end_idx = GetEndOfExplosion(cur_idx, grid[x][y]);
-
-        if(grid[x][y] == 0) break;
         int continue_cnt = end_idx - cur_idx + 1;
 
+        if(grid[x][y] == 0) break;
+        
         if(temp_idx >= end_of_array) break;
 
         int tx, ty;
@@ -159,7 +159,6 @@ void LookandSay(){
 
 void Simulate(){
     Attack();
-
     while(1){
         bool did_explode = Bomb();
         if(!did_explode) break;
