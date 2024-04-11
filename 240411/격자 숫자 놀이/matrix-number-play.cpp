@@ -85,8 +85,8 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
     cin >> r >> c >> k;
-    for(int i=0; i<r; i++){
-        for(int j=0; j<c; j++){
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
             cin >> grid[i][j];
         }
     }
@@ -99,6 +99,6 @@ int main() {
             break;
         }
     }
-    cout << ans-1;
+    cout << ans;
     return 0;
 }
