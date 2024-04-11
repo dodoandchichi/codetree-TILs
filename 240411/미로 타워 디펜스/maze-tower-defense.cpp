@@ -187,3 +187,12 @@ int main() {
     cout << ans;
     return 0;
 }
+
+
+/*
+    ㅈㄴ 어렵다... Pull 함수도 어렵고,,,
+    remove뒤에 pull을 괜히 적어서 simulate에서 또 pull하게 하는 실수하고,,
+    break 되는 기준 제대로 안적어서 시간초과가 남
+
+    if(grid[x][y] == 0), if(temp_idx >= end_of_array) 등등,,
+*/
