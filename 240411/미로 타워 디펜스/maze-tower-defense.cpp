@@ -9,7 +9,7 @@ using namespace std;
 int n, m;
 int grid[MAX_N][MAX_N];
 int temp[MAX_N][MAX_N];
-int d, p;
+int dir, power;
 vector<pair<int, int>> spirals;
 int ans;
 
@@ -50,9 +50,8 @@ void Pull(){
         tie(tx, ty) = grid_point;
         if(grid[tx][ty]){
             int x, y;
-            tie(x, y) = spirals[temp_idx];
+            tie(x, y) = spirals[temp_idx++];
             temp[x][y] = grid[tx][ty];
-            temp_idx++;
         }
     }
 
@@ -67,9 +66,9 @@ void Attack(){
 
     int x = n / 2, y = n / 2;
 
-    for(int i=1; i<=p; i++){
-        int new_x = x + dx[d] * i;
-        int new_y = y + dy[d] * i;
+    for(int i=1; i<=power; i++){
+        int new_x = x + dx[dir] * i;
+        int new_y = y + dy[dir] * i;
         if(InRange(new_x, new_y)){
             ans += grid[new_x][new_y];
             grid[new_x][new_y] = 0;
@@ -183,7 +182,7 @@ int main() {
     SearchSpiral();
 
     while(m--){
-        cin >> d >> p;
+        cin >> dir >> power;
         Simulate();
     }
     cout << ans;
