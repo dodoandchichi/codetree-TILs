@@ -50,8 +50,9 @@ void Pull(){
         tie(tx, ty) = grid_point;
         if(grid[tx][ty]){
             int x, y;
-            tie(x, y) = spirals[temp_idx++];
+            tie(x, y) = spirals[temp_idx];
             temp[x][y] = grid[tx][ty];
+            temp_idx++;
         }
     }
 
@@ -132,10 +133,10 @@ void LookandSay(){
         tie(x, y) = spirals[cur_idx];
 
         int end_idx = GetEndOfExplosion(cur_idx, grid[x][y]);
-        int continue_cnt = end_idx - cur_idx + 1;
 
         if(grid[x][y] == 0) break;
-        
+        int continue_cnt = end_idx - cur_idx + 1;
+
         if(temp_idx >= end_of_array) break;
 
         int tx, ty;
