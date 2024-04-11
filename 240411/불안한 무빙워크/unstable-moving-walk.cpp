@@ -114,3 +114,7 @@ int main() {
     cout << turn;
     return 0;
 }
+
+/*
+    쉽네요
+*/
