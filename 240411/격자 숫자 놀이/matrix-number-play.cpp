@@ -92,12 +92,12 @@ int main() {
     }
 
     int ans = -1;
-    for(int i=1; i<=100; i++){
-        Simulate();
+    for(int i=0; i<100; i++){
         if(grid[r-1][c-1] == k){
             ans = i;
             break;
         }
+        Simulate(); 
     }
     cout << ans;
     return 0;
