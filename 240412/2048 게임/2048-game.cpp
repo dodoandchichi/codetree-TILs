@@ -8,6 +8,7 @@ using namespace std;
 
 int n;
 int grid[MAX_N][MAX_N];
+int copy_grid[MAX_N][MAX_N];
 int temp[MAX_N][MAX_N];
 int move_dir[NUM_MOVES];
 
@@ -27,19 +28,19 @@ int GetMaxNum(){
 void Rotate(){
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            temp[i][j] = 0;
+            copy_grid[i][j] = 0;
         }
     }
 
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            temp[n-j-1][i] = grid[i][j];
+            copy_grid[n-j-1][i] = grid[i][j];
         }
     }
 
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            grid[i][j] = temp[i][j];
+            grid[i][j] = copy_grid[i][j];
         }
     }
 }
@@ -47,7 +48,7 @@ void Rotate(){
 void Drop(){
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            temp[i][j] = 0;
+            copy_grid[i][j] = 0;
         }
     }
 
@@ -60,20 +61,20 @@ void Drop(){
                 keep_num = grid[i][j];
             }
             else if(keep_num == grid[i][j]){
-                temp[temp_idx--][j] = keep_num * 2;
+                copy_grid[temp_idx--][j] = keep_num * 2;
                 keep_num = -1;
             }
             else{
-                temp[temp_idx--][j] = keep_num;
+                copy_grid[temp_idx--][j] = keep_num;
                 keep_num = grid[i][j];
             }
         }
-        if(keep_num != -1) temp[temp_idx--][j] = keep_num;
+        if(keep_num != -1) copy_grid[temp_idx--][j] = keep_num;
     }
     
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            grid[i][j] = temp[i][j];
+            grid[i][j] = copy_grid[i][j];
         }
     }
 }
