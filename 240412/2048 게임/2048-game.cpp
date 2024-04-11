@@ -33,7 +33,7 @@ void Rotate(){
 
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            temp[i][j] = grid[n-j-1][i];
+            temp[j][n-i-1] = grid[i][j];
         }
     }
 
