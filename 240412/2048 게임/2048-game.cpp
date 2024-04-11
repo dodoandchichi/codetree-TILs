@@ -18,7 +18,7 @@ int GetMaxNum(){
 
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            maxNum = max(maxNum, temp[i][j]);
+            maxNum = max(maxNum, grid[i][j]);
         }
     }
     return maxNum;
@@ -33,7 +33,7 @@ void Rotate(){
 
     for(int i=0; i<n; i++){
         for(int j=0; j<n; j++){
-            temp[j][n-i-1] = grid[i][j];
+            temp[n-j-1][i] = grid[i][j];
         }
     }
 
