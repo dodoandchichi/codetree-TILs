@@ -183,3 +183,7 @@ int main() {
     cout << turn;
     return 0;
 }
+
+/*
+문제를 제대로읽자
+*/
