@@ -179,9 +179,9 @@ void Simulate() {
     /*cout << "After Breed\n";
     Print();*/
     FindMax();
-    /*DecDrug();
-    cout << "After drug\n";*/
-    Print();
+    DecDrug();
+    /*cout << "After drug\n";
+    Print();*/
 }
 
 int main() {
