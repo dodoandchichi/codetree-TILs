@@ -72,7 +72,7 @@ void Duplicate() {
             }
         }
     }
-   /* cout << "temp\n";
+    cout << "temp\n";
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             int cnt = 0;
@@ -83,7 +83,7 @@ void Duplicate() {
         }
         cout << "\n";
     }
-    cout << "\n";*/
+    cout << "\n";
 }
 
 void Mon_MoveAll() {
@@ -118,7 +118,7 @@ int FindKillNum(int dir1, int dir2, int dir3) {
     int kill = 0;
     int dir[] = { dir1, dir2, dir3 };
     int dx[P_DIR_NUM] = { -1, 0, 1, 0 }, dy[P_DIR_NUM] = { 0, -1, 0, 1 };
-
+    bool visit = false;
     int cur_x, cur_y;
     tie(cur_x, cur_y) = pack;
 
@@ -129,25 +129,27 @@ int FindKillNum(int dir1, int dir2, int dir3) {
         if (!InRange(cur_x, cur_y)) return -1;
         
         for (int j = 0; j < v_pos.size(); j++) {
-            if(v_pos[j] == make_pair(cur_x, cur_y)) return -1;
+            if (v_pos[j] == make_pair(cur_x, cur_y)) visit = true;
         }
 
-        v_pos.push_back(make_pair(cur_x, cur_y));
+        if (!visit) {
+            v_pos.push_back(make_pair(cur_x, cur_y));
 
-        for (int j = 0; j < DIR_NUM; j++) {
-            if (mon[turn][cur_x][cur_y][j]) kill += mon[turn][cur_x][cur_y][j];
+            for (int dir = 0; dir < DIR_NUM; dir++) {
+                if (mon[turn][cur_x][cur_y][dir]) kill += mon[turn][cur_x][cur_y][dir];
+            }
         }
     }
-   /* cout << dir1 << " " << dir2 << " " << dir3 << "\n";
-    cout << "kill: " << kill << "\n";*/
+    cout << dir1 << " " << dir2 << " " << dir3 << "\n";
+    cout << "kill: " << kill << "\n";
     return kill;
 }
 
 void GoKill(int dir1, int dir2, int dir3) {
     int dir[] = { dir1, dir2, dir3 };
     int dx[P_DIR_NUM] = { -1, 0, 1, 0 }, dy[P_DIR_NUM] = { 0, -1, 0, 1 };
-    /*cout << "gokill\n";
-    cout << dir1 << " " << dir2 << " " << dir3 << "\n";*/
+    cout << "gokill\n";
+    cout << dir1 << " " << dir2 << " " << dir3 << "\n";
     int cur_x, cur_y;
     tie(cur_x, cur_y) = pack;
 
@@ -200,7 +202,21 @@ void Dead_Decay() {
 }
 
 void Breed() {
-    // Print();
+    cout << "temp\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            int cnt = 0;
+            for (int k = 0; k < DIR_NUM; k++) {
+                if (temp[turn][i][j][k]) cnt += temp[turn][i][j][k];
+            }
+            cout << cnt << " ";
+        }
+        cout << "\n";
+    }
+    cout << "\n";
+
+    cout << "mon\n";
+    Print();
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -209,15 +225,28 @@ void Breed() {
             }
         }
     }
+
+    cout << "next mon\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            int cnt = 0;
+            for (int k = 0; k < DIR_NUM; k++) {
+                if (mon[turn+1][i][j][k]) cnt += mon[turn+1][i][j][k];
+            }
+            cout << cnt << " ";
+        }
+        cout << "\n";
+    }
+    cout << "\n";
 }
 
 void Simulate() {
     Duplicate();
-   // Print();
+    Print();
     Mon_MoveAll();
-   // Print();
+    Print();
     Pack_Move();
-   // Print();
+    Print();
     Dead_Decay();
     Breed();
 }
@@ -249,6 +278,19 @@ int main() {
             }
         }
     }
+
+    cout << "fianl\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            int cnt = 0;
+            for (int k = 0; k < DIR_NUM; k++) {
+                if (mon[t][i][j][k]) cnt += mon[t][i][j][k];
+            }
+            cout << cnt << " ";
+        }
+        cout << "\n";
+    }
+    cout << "\n";
     cout << ans;
     return 0;
 }
