@@ -4,8 +4,8 @@
 #include <queue>
 #include <climits>
 
-#define MAX_N 16
-#define MAX_M 31
+#define MAX_N 30
+#define MAX_M 60
 #define DIR_NUM 4
 #define EMPTY make_pair(-1, -1)
 using namespace std;
