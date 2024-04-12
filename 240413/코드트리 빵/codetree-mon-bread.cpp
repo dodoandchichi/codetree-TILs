@@ -4,8 +4,8 @@
 #include <queue>
 #include <climits>
 
-#define MAX_N 30
-#define MAX_M 60
+#define MAX_N 16
+#define MAX_M 31
 #define DIR_NUM 4
 #define EMPTY make_pair(-1, -1)
 using namespace std;
@@ -105,34 +105,36 @@ bool NeedUpdate(pair<int, int> close_base, pair<int, int> cur_base) {
 }
 
 void GoBase(int t) {
-    Init();
-    visited[cnv_list[t].first][cnv_list[t].second] = true;
-    q.push(cnv_list[t]);
-    BFS();
-    /*cout << "who? " << t << "\n";
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            cout << step[i][j] << " ";
+    if (t <= m) {
+        Init();
+        visited[cnv_list[t].first][cnv_list[t].second] = true;
+        q.push(cnv_list[t]);
+        BFS();
+        /*cout << "who? " << t << "\n";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cout << step[i][j] << " ";
+            }
+            cout << "\n";
         }
-        cout << "\n";
-    }
-    cout << "\n";*/
-    pair<int, int> close_base = EMPTY;
+        cout << "\n";*/
+        pair<int, int> close_base = EMPTY;
 
-    for (int i = 0; i < (int)base.size(); i++) {
-        pair<int, int> cur_base = base[i];
+        for (int i = 0; i < (int)base.size(); i++) {
+            pair<int, int> cur_base = base[i];
+            int x, y;
+            tie(x, y) = base[i];
+            if (NeedUpdate(close_base, cur_base) && visited[x][y]) {
+                close_base = cur_base;
+            }
+        }
+
         int x, y;
-        tie(x, y) = base[i];
-        if (NeedUpdate(close_base, cur_base) && visited[x][y]) {
-            close_base = cur_base;
-        }
+        tie(x, y) = close_base;
+        // cout << x << " " << y << t << "\n";
+        grid[x][y] = 2;
+        guest[t] = make_pair(x, y);
     }
-
-    int x, y;
-    tie(x, y) = close_base;
-    // cout << x << " " << y << t << "\n";
-    grid[x][y] = 2;
-    guest[t] = make_pair(x, y);
 }
 
 void Simulate(int t) {
