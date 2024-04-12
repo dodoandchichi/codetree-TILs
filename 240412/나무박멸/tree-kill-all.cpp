@@ -116,7 +116,7 @@ tuple<int, int, int> Drug(int x, int y) {
             if (InRange(new_x, new_y) && canGo[dir]) {
                 if (tree[new_x][new_y] > 0)
                     kill += tree[new_x][new_y];
-                else if(tree[new_x][new_y] || wall[new_x][new_y]) canGo[dir] = false;
+                else if(tree[new_x][new_y] == 0 || wall[new_x][new_y]) canGo[dir] = false;
             }
         }
     }
@@ -141,7 +141,7 @@ void Kill(int x, int y) {
                     ans += tree[new_x][new_y];
                     tree[new_x][new_y] = 0;
                 }
-                else if (tree[new_x][new_y] || wall[new_x][new_y]) canGo[dir] = false;
+                else if (tree[new_x][new_y] == 0 || wall[new_x][new_y]) canGo[dir] = false;
             }
         }
     }
@@ -174,15 +174,15 @@ void DecDrug() {
 
 void Simulate() {
     GrowAll();
-    // cout << "After grow\n";
-    // Print();
+    /*cout << "After grow\n";
+    Print();*/
     BreedAll();
-    // cout << "After Breed\n";
-    // Print();
+    /*cout << "After Breed\n";
+    Print();*/
     FindMax();
     DecDrug();
-    // cout << "After drug\n";
-    // Print();
+    /*cout << "After drug\n";
+    Print();*/
 }
 
 int main() {
