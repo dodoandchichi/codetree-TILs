@@ -4,7 +4,7 @@
 #include <queue>
 #include <climits>
 
-#define MAX_N 15
+#define MAX_N 16
 #define MAX_M 31
 #define DIR_NUM 4
 #define EMPTY make_pair(-1, -1)
