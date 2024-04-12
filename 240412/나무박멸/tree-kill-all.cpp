@@ -128,6 +128,7 @@ void Kill(int x, int y) {
     int dx[DIR_NUM] = { -1, -1, 1, 1 }, dy[DIR_NUM] = { -1, 1, -1, 1 };
     ans += tree[x][y];
     tree[x][y] = 0;
+    drug[x][y] = c + 1;
     bool canGo[4] = { true, true, true, true };
 
     for (int dir = 0; dir < DIR_NUM; dir++) {
@@ -173,15 +174,15 @@ void DecDrug() {
 
 void Simulate() {
     GrowAll();
-    /*cout << "After grow\n";
-    Print();*/
+    // cout << "After grow\n";
+    // Print();
     BreedAll();
-    /*cout << "After Breed\n";
-    Print();*/
+    // cout << "After Breed\n";
+    // Print();
     FindMax();
     DecDrug();
-    /*cout << "After drug\n";
-    Print();*/
+    // cout << "After drug\n";
+    // Print();
 }
 
 int main() {
