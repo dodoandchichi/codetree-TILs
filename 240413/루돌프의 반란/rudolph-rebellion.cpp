@@ -133,6 +133,9 @@ void Santa_Move(){
             int first_x = x, first_y = y;
             int last_x = first_x, last_y = first_y;
             
+            if(!InRange(first_x, first_y)){
+                lived[closest_idx] = false;
+            }
             while(grid[last_x][last_y] != 0){
                 last_x -= dx[dir];
                 last_y -= dy[dir];
