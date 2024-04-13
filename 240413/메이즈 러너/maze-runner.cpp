@@ -119,18 +119,6 @@ void Rotate(){
     RotateObjects(sx, sy, square_size);
 }
 
-void Simulate(){
-    Move();
-    Rotate();
-    // for(int i=0; i<n; i++){
-    //     for(int j=0; j<n; j++){
-    //         cout << grid[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
-    // cout << "\n";
-}
-
 bool End(){
     for(int i=0; i<m; i++){
         if(human[i] != exits) return false;
@@ -158,8 +146,9 @@ int main() {
     exits = make_pair(r-1, c-1);
 
     while(k--){
-        Simulate();
+        Move();
         if(End()) break;
+        Rotate();
     }
     cout << dist << "\n" << exits.first+1 << " " << exits.second+1;
     return 0;
