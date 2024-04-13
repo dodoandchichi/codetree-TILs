@@ -62,15 +62,6 @@ void ChooseAttaker(){
     tower[weak_x][weak_y] = make_pair(-power + n + m, t);
     attaker = make_pair(weak_x, weak_y);
     related[weak_x][weak_y] = true;
-
-    // cout << "choose attacker\n";
-    // for(int i=0; i<n; i++){
-    //     for(int j=0; j<m; j++){
-    //         cout << tower[i][j].first << " ";
-    //     }
-    //     cout << "\n";
-    // }
-    // cout << "\n";
 }
 
 void ChooseSubAttaker(){
@@ -79,7 +70,7 @@ void ChooseSubAttaker(){
 
     for(int i=0; i<n; i++){
         for(int j=0; j<m; j++){
-            if(tower[i][j].first != 0){
+            if(tower[i][j].first != 0 && attaker != make_pair(i, j)){
                 int power, past;
                 tie(power, past) = tower[i][j];
                 tuple<int, int, int, int> cur_tower = make_tuple(power, -past, -(i+j), -j);
@@ -213,6 +204,14 @@ void Simulate(){
     // cout << "\n";
     ChooseAttaker();
     ChooseSubAttaker();
+    // cout << "choose attacker\n";
+    // for(int i=0; i<n; i++){
+    //     for(int j=0; j<m; j++){
+    //         cout << tower[i][j].first << " ";
+    //     }
+    //     cout << "\n";
+    // }
+    // cout << "\n";
     FindLaser();
     if(can_laser) LaserAttack();
     else PortAttack();
