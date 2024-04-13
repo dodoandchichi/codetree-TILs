@@ -1,8 +1,8 @@
 #include <iostream>
 #include <queue>
 
-#define MAX_N 31
-#define MAX_M 41
+#define MAX_N 41
+#define MAX_M 31
 using namespace std;
 
 int n, m, q;
