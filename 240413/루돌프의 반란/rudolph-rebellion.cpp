@@ -30,7 +30,7 @@ void Print(){
 }
 
 void Rudolf_Move(){
-    tuple<int, int, int> closest_santa = make_tuple(INT_MIN, 0, 0);
+    tuple<int, int, int> closest_santa = make_tuple(INT_MIN, -1, -1);
     int closest_idx = -1;
     int rx, ry;
     tie(rx, ry) = rudolf;
@@ -71,7 +71,10 @@ void Rudolf_Move(){
 
         int first_x = x, first_y = y;
         int last_x = first_x, last_y = first_y;
-
+        if(!InRange(first_x, first_y)){
+            lived[closest_idx] = false;
+            return;
+        }
         while(grid[last_x][last_y] != 0){
             last_x += move_x;
             last_y += move_y;
@@ -89,13 +92,9 @@ void Rudolf_Move(){
             }
             last_x = before_x, last_y = before_y;
         }
-        if(!InRange(first_x, first_y)){
-            lived[closest_idx] = false;
-        }
-        else {
-            santa[closest_idx] = make_pair(first_x, first_y);
-            grid[first_x][first_y] = closest_idx;
-        }
+     
+        santa[closest_idx] = make_pair(first_x, first_y);
+        grid[first_x][first_y] = closest_idx;
     }
 }
 
@@ -133,7 +132,7 @@ void Santa_Move(){
 
             int first_x = x, first_y = y;
             int last_x = first_x, last_y = first_y;
-
+            
             while(grid[last_x][last_y] != 0){
                 last_x -= dx[dir];
                 last_y -= dy[dir];
