@@ -2,8 +2,8 @@
 #include <climits>
 #include <tuple>
 
-#define MAX_N 500
-#define MAX_P 500
+#define MAX_N 51
+#define MAX_P 100
 #define DIR_NUM 4
 using namespace std;
 
@@ -75,7 +75,7 @@ void Rudolf_Move(){
             lived[closest_idx] = false;
             return;
         }
-        while(grid[last_x][last_y] != 0){
+        while(grid[last_x][last_y] > 0){
             last_x += move_x;
             last_y += move_y;
         }
@@ -138,7 +138,7 @@ void Santa_Move(){
                 continue;
             }
 
-            while(grid[last_x][last_y] != 0){
+            while(grid[last_x][last_y] > 0){
                 last_x -= dx[dir];
                 last_y -= dy[dir];
             }
