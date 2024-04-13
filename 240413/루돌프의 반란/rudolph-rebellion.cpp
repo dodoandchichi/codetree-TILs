@@ -134,7 +134,8 @@ void Santa_Move(){
             int last_x = first_x, last_y = first_y;
             
             if(!InRange(first_x, first_y)){
-                lived[closest_idx] = false;
+                lived[i] = false;
+                return;
             }
             while(grid[last_x][last_y] != 0){
                 last_x -= dx[dir];
@@ -152,14 +153,9 @@ void Santa_Move(){
                     lived[santa_idx] = false;
                 }
                 last_x = before_x, last_y = before_y;
-            }
-            if(!InRange(first_x, first_y)){
-                lived[i] = false;
-            }
-            else {
-                santa[i] = make_pair(first_x, first_y);
-                grid[first_x][first_y] = i;
-            }
+            }  
+            santa[i] = make_pair(first_x, first_y);
+            grid[first_x][first_y] = i;
         }
         else{
             santa[i] = make_pair(min_x, min_y);
