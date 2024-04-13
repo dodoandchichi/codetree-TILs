@@ -16,7 +16,7 @@ bool is_moved[MAX_N];
 int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
 
 bool TryMovement(int idx, int dir){
-    for(int i=0; i<n; i++){
+    for(int i=0; i<m; i++){
         dmg[i] = 0;
         is_moved[i] = false;
         nr[i] = r[i];
@@ -45,7 +45,7 @@ bool TryMovement(int idx, int dir){
             }
         } 
 
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < m; i++) {
             if(is_moved[i] || k[i] <= 0) 
                 continue;
             if(r[i] > nr[x] + h[x] - 1 || nr[x] > r[i] + h[i] - 1) 
@@ -66,7 +66,7 @@ void MovePiece(int idx, int dir){
     if(k[idx] <= 0) return;
 
     if(TryMovement(idx, dir)){
-        for(int i=0; i<n; i++){
+        for(int i=0; i<m; i++){
             r[i] = nr[i];
             c[i] = nc[i];
             k[i] -= dmg[i];
@@ -97,7 +97,7 @@ int main() {
     }
 
     int ans = 0;
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < m; i++) {
         if(k[i] > 0) {
             ans += bef_k[i] - k[i];
         }
