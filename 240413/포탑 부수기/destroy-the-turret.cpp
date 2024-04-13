@@ -169,7 +169,7 @@ void PortAttack(){
     for(int i=0; i<P_DIR_NUM; i++){
         int new_x = (ex + dx[i] + n) % n;
         int new_y = (ey + dy[i] + m) % m;
-        if(tower[new_x][new_y].first != 0 && tower[new_x][new_y] != attaker){
+        if(tower[new_x][new_y].first != 0 && attaker != make_pair(new_x, new_y)){
             int p, past;
             tie(p, past) = tower[new_x][new_y];
 
@@ -194,14 +194,6 @@ void HealTower(){
 
 void Simulate(){
     Init();
-    // cout << "Befor attack\n";
-    // for(int i=0; i<n; i++){
-    //     for(int j=0; j<m; j++){
-    //         cout << tower[i][j].first << " ";
-    //     }
-    //     cout << "\n";
-    // }
-    // cout << "\n";
     ChooseAttaker();
     ChooseSubAttaker();
     // cout << "choose attacker\n";
