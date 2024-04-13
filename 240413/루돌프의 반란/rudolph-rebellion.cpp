@@ -137,6 +137,7 @@ void Santa_Move(){
                 lived[i] = false;
                 return;
             }
+
             while(grid[last_x][last_y] != 0){
                 last_x -= dx[dir];
                 last_y -= dy[dir];
@@ -153,7 +154,7 @@ void Santa_Move(){
                     lived[santa_idx] = false;
                 }
                 last_x = before_x, last_y = before_y;
-            }  
+            }
             santa[i] = make_pair(first_x, first_y);
             grid[first_x][first_y] = i;
         }
