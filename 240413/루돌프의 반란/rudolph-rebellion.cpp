@@ -2,8 +2,8 @@
 #include <climits>
 #include <tuple>
 
-#define MAX_N 1000
-#define MAX_P 1000
+#define MAX_N 500
+#define MAX_P 300
 #define DIR_NUM 4
 using namespace std;
 
@@ -233,3 +233,7 @@ int main() {
     for(int i=1; i<=p; i++) cout << point[i] << " ";
     return 0;
 }
+
+/*
+    배열을 크게 해야만 통과가 된다.. 왜 일까,, 어렵다ㅡ,,,
+*/
