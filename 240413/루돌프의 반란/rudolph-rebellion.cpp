@@ -181,15 +181,28 @@ void LivePoint(){
     }
 }
 
-void Simulate(){
+bool End(){
+    for(int i=1; i<=p; i++){
+        if(lived[i]) return false;
+    }
+    return true;
+}
+
+bool Simulate(){
+    // cout << "before rudolf\n";
+    // Print();
     Rudolf_Move();
+    if(End()) return true;
     // cout << "After rudolf\n";
     // Print();
     Santa_Move();
+    if(End()) return true;
     // cout << "After santa\n";
     // Print();
     DecStun();
     LivePoint();
+
+    return false;
 }
 
 int main() {
@@ -210,7 +223,8 @@ int main() {
     }
 
     while(m--){
-        Simulate();
+        bool is_end = Simulate();
+        if(is_end) break;
     }
     for(int i=1; i<=p; i++) cout << point[i] << " ";
     return 0;
