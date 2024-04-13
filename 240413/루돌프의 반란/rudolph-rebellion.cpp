@@ -3,7 +3,7 @@
 #include <tuple>
 
 #define MAX_N 500
-#define MAX_P 300
+#define MAX_P 500
 #define DIR_NUM 4
 using namespace std;
 
