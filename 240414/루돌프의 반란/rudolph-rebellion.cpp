@@ -2,8 +2,8 @@
 #include <climits>
 #include <tuple>
 
-#define MAX_N 10000
-#define MAX_P 10000
+#define MAX_N 2000
+#define MAX_P 2000
 #define DIR_NUM 4
 using namespace std;
 
